@@ -61,6 +61,8 @@ class EtekcityAdapter(Adapter):
                 device = EtekcityDevice(self, _id, dev)
                 self.handle_device_added(device)
 
+        self.pairing = False
+
     def cancel_pairing(self):
         """Cancel the pairing process."""
         self.pairing = False
