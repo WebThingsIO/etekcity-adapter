@@ -24,13 +24,12 @@
   "files": [
     "LICENSE",
     "SHA256SUMS",
+    "lib",
     "main.py",
     "pkg/__init__.py",
     "pkg/etekcity_adapter.py",
     "pkg/etekcity_device.py",
-    "pkg/etekcity_property.py",
-    "requirements.txt",
-    "setup.cfg"
+    "pkg/etekcity_property.py"
   ],
   "moziot": {
     "api": {

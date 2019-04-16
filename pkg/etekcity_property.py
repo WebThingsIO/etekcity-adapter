@@ -24,7 +24,6 @@ class EtekcityProperty(Property):
 
         value -- the value to set
         """
-        print('set_value', self.name, value)
         if self.name == 'on':
             success = False
             if value:
