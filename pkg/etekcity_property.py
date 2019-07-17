@@ -18,6 +18,76 @@ class EtekcityProperty(Property):
         Property.__init__(self, device, name, description)
         self.set_cached_value(value)
 
+
+class EtekcityBulbProperty(EtekcityProperty):
+    """Etekcity bulb property type."""
+
+    def set_value(self, value):
+        """
+        Set the current value of the property.
+
+        value -- the value to set
+        """
+        if self.name == 'brightness':
+            success = self.device.vesync_dev.set_brightness(value)
+
+            if success:
+                self.set_cached_value(value)
+                self.device.notify_property_changed(self)
+
+    def update(self):
+        """Update the current value, if necessary."""
+        value = None
+        if self.name == 'brightness':
+            value = self.device.brightness
+        else:
+            return
+
+        if value != self.value:
+            self.set_cached_value(value)
+            self.device.notify_property_changed(self)
+
+
+class EtekcityOutletProperty(EtekcityProperty):
+    """Etekcity outlet property type."""
+
+    def set_value(self, value):
+        """
+        Set the current value of the property.
+
+        value -- the value to set
+        """
+        if self.name == 'nightLightMode':
+            success = False
+            if value == 'auto':
+                success = self.device.vesync_dev.turn_on_nightlight()
+            else:
+                success = self.device.vesync_dev.turn_off_nightlight()
+
+            if success:
+                self.set_cached_value(value)
+                self.device.notify_property_changed(self)
+
+    def update(self):
+        """Update the current value, if necessary."""
+        value = None
+        if self.name == 'power':
+            value = self.device.power
+        elif self.name == 'voltage':
+            value = self.device.voltage
+        elif self.name == 'nightLightMode':
+            value = self.device.night_light_mode
+        else:
+            return
+
+        if value != self.value:
+            self.set_cached_value(value)
+            self.device.notify_property_changed(self)
+
+
+class EtekcitySwitchProperty(EtekcityProperty):
+    """Etekcity switch property type."""
+
     def set_value(self, value):
         """
         Set the current value of the property.
@@ -34,28 +104,12 @@ class EtekcityProperty(Property):
             if success:
                 self.set_cached_value(value)
                 self.device.notify_property_changed(self)
-        elif self.name == 'nightLightMode':
-            success = False
-            if value == 'auto':
-                success = self.device.vesync_dev.turn_on_nightlight()
-            else:
-                success = self.device.vesync_dev.turn_off_nightlight()
-
-            if success:
-                self.set_cached_value(value)
-                self.device.notify_property_changed(self)
 
     def update(self):
         """Update the current value, if necessary."""
         value = None
         if self.name == 'on':
             value = self.device.on
-        elif self.name == 'power':
-            value = self.device.power
-        elif self.name == 'voltage':
-            value = self.device.voltage
-        elif self.name == 'nightLightMode':
-            value = self.device.night_light_mode
         else:
             return
 

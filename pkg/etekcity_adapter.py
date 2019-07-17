@@ -3,7 +3,7 @@
 from gateway_addon import Adapter, Database
 from pyvesync.vesync import VeSync
 
-from .etekcity_device import EtekcityDevice
+from .etekcity_device import EtekcityBulb, EtekcityOutlet, EtekcitySwitch
 
 
 _TIMEOUT = 3
@@ -52,13 +52,23 @@ class EtekcityAdapter(Adapter):
         self.pairing = True
 
         self.manager.update()
-        for dev in self.manager.devices:
-            if not self.pairing:
-                break
 
+        for dev in self.manager.bulbs:
             _id = 'etekcity-' + dev.uuid
             if _id not in self.devices:
-                device = EtekcityDevice(self, _id, dev)
+                device = EtekcityBulb(self, _id, dev)
+                self.handle_device_added(device)
+
+        for dev in self.manager.outlets:
+            _id = 'etekcity-' + dev.uuid
+            if _id not in self.devices:
+                device = EtekcityOutlet(self, _id, dev)
+                self.handle_device_added(device)
+
+        for dev in self.manager.switches:
+            _id = 'etekcity-' + dev.uuid
+            if _id not in self.devices:
+                device = EtekcitySwitch(self, _id, dev)
                 self.handle_device_added(device)
 
         self.pairing = False
