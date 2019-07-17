@@ -1,6 +1,6 @@
 # etekcity-adapter
 
-Etekcity smart plug/switch adapter for Mozilla WebThings Gateway.
+Etekcity smart device adapter for Mozilla WebThings Gateway.
 
 # Supported Devices
 
@@ -12,9 +12,12 @@ Etekcity smart plug/switch adapter for Mozilla WebThings Gateway.
 
 ## Untested but _Should Work_
 
+* Smart bulbs
+    * Etekcity Soft White Dimmable Smart Bulb (ESL100)
 * Smart plugs
     * Etekcity Voltson Smart WiFi Outlet (7A model ESW01-USA)
     * Etekcity Voltson Smart WiFi Outlet (10A model ESW01-EU)
+    * Etekcity Two Plug Outdoor Outlet (ESO15-TB)
 * Smart switches
     * Etekcity Smart WiFi Light Switch (model ESWL01)
 
