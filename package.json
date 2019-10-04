@@ -1,7 +1,7 @@
 {
   "name": "etekcity-adapter",
   "display_name": "Etekcity",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Etekcity smart device adapter plugin for Mozilla WebThings Gateway",
   "author": "Mozilla IoT",
   "main": "main.py",
@@ -23,9 +23,11 @@
   },
   "files": [
     "LICENSE",
+    "README.md",
     "SHA256SUMS",
     "lib",
     "main.py",
+    "manifest.json",
     "pkg/__init__.py",
     "pkg/etekcity_adapter.py",
     "pkg/etekcity_device.py",
