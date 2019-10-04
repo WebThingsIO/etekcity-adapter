@@ -1,0 +1,42 @@
+{
+  "author": "Mozilla IoT",
+  "description": "Etekcity smart device adapter plugin for Mozilla WebThings Gateway",
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "python3 {path}/main.py",
+      "primary_type": "adapter",
+      "strict_max_version": "*",
+      "strict_min_version": "0.10.0"
+    }
+  },
+  "homepage_url": "https://github.com/mozilla-iot/etekcity-adapter",
+  "id": "etekcity-adapter",
+  "license": "MPL-2.0",
+  "manifest_version": 1,
+  "name": "Etekcity",
+  "options": {
+    "default": {
+      "username": "",
+      "password": ""
+    },
+    "schema": {
+      "type": "object",
+      "required": [
+        "username",
+        "password"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "VeSync app username"
+        },
+        "password": {
+          "type": "string",
+          "description": "VeSync app password"
+        }
+      }
+    }
+  },
+  "short_name": "Etekcity",
+  "version": "0.3.0"
+}
