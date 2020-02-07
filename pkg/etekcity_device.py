@@ -39,7 +39,7 @@ class EtekcityDevice(Device):
             'on',
             {
                 '@type': 'OnOffProperty',
-                'label': 'On/Off',
+                'title': 'On/Off',
                 'type': 'boolean',
             },
             self.on)
@@ -77,7 +77,6 @@ class EtekcityBulb(EtekcityDevice):
         EtekcityDevice.__init__(self, adapter, _id, vesync_dev)
 
         self._type = ['OnOffSwitch', 'Light']
-        self.type = 'onOffLight'
 
         if vesync_dev.dimmable_feature:
             self.properties['brightness'] = EtekcityBulbProperty(
@@ -85,13 +84,14 @@ class EtekcityBulb(EtekcityDevice):
                 'brightness',
                 {
                     '@type': 'BrightnessProperty',
-                    'label': 'Brightness',
+                    'title': 'Brightness',
                     'type': 'integer',
                     'unit': 'percent',
                     'minimum': 1,
                     'maximum': 100,
                 },
-                self.brightness)
+                self.brightness
+            )
 
     @property
     def brightness(self):
@@ -113,42 +113,44 @@ class EtekcityOutlet(EtekcityDevice):
         EtekcityDevice.__init__(self, adapter, _id, vesync_dev)
 
         self._type = ['OnOffSwitch', 'EnergyMonitor', 'SmartPlug']
-        self.type = 'onOffSwitch'
 
         self.properties['power'] = EtekcityOutletProperty(
             self,
             'power',
             {
                 '@type': 'InstantaneousPowerProperty',
-                'label': 'Power',
+                'title': 'Power',
                 'type': 'number',
                 'unit': 'watt',
                 'readOnly': True,
             },
-            self.power)
+            self.power
+        )
 
         self.properties['voltage'] = EtekcityOutletProperty(
             self,
             'voltage',
             {
                 '@type': 'VoltageProperty',
-                'label': 'Voltage',
+                'title': 'Voltage',
                 'type': 'number',
                 'unit': 'volt',
                 'readOnly': True,
             },
-            self.voltage)
+            self.voltage
+        )
 
         if vesync_dev.device_type in ['ESW15-USA', 'ESW01-EU']:
             self.properties['nightLightMode'] = EtekcityOutletProperty(
                 self,
                 'nightLightMode',
                 {
-                    'label': 'Night Light Mode',
+                    'title': 'Night Light Mode',
                     'type': 'string',
                     'enum': ['auto', 'manual'],
                 },
-                self.night_light_mode)
+                self.night_light_mode
+            )
 
     @property
     def power(self):
@@ -180,4 +182,3 @@ class EtekcitySwitch(EtekcityDevice):
         EtekcityDevice.__init__(self, adapter, _id, vesync_dev)
 
         self._type = ['OnOffSwitch']
-        self.type = 'onOffSwitch'
