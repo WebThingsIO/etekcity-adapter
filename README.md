@@ -14,12 +14,14 @@ Etekcity smart device adapter for Mozilla WebThings Gateway.
 
 * Smart bulbs
     * Etekcity Soft White Dimmable Smart Bulb (ESL100)
+    * Etekcity Cool to Soft White Tunable Dimmable Bulb (ESL100CW)
 * Smart plugs
     * Etekcity Voltson Smart WiFi Outlet (7A model ESW01-USA)
     * Etekcity Voltson Smart WiFi Outlet (10A model ESW01-EU)
     * Etekcity Two Plug Outdoor Outlet (ESO15-TB)
 * Smart switches
     * Etekcity Smart WiFi Light Switch (model ESWL01)
+    * Etekcity Wifi Dimmer Switch (ESD16)
 
 # Requirements
 

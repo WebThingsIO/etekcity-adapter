@@ -30,16 +30,23 @@ class EtekcityBulbProperty(EtekcityProperty):
         """
         if self.name == 'brightness':
             success = self.device.vesync_dev.set_brightness(value)
+        elif self.name == 'colorTemperature':
+            pct = 100 * (value - 2700) / (6500 - 2700)
+            success = self.device.vesync_dev.set_color_temp(pct)
+        else:
+            return
 
-            if success:
-                self.set_cached_value(value)
-                self.device.notify_property_changed(self)
+        if success:
+            self.set_cached_value(value)
+            self.device.notify_property_changed(self)
 
     def update(self):
         """Update the current value, if necessary."""
         value = None
         if self.name == 'brightness':
             value = self.device.brightness
+        elif self.name == 'colorTemperature':
+            value = self.device.color_temp
         else:
             return
 
@@ -94,22 +101,28 @@ class EtekcitySwitchProperty(EtekcityProperty):
 
         value -- the value to set
         """
+        success = False
         if self.name == 'on':
-            success = False
             if value:
                 success = self.device.vesync_dev.turn_on()
             else:
                 success = self.device.vesync_dev.turn_off()
+        elif self.name == 'level':
+            success = self.device.vesync_dev.set_brightness(value)
+        else:
+            return
 
-            if success:
-                self.set_cached_value(value)
-                self.device.notify_property_changed(self)
+        if success:
+            self.set_cached_value(value)
+            self.device.notify_property_changed(self)
 
     def update(self):
         """Update the current value, if necessary."""
         value = None
         if self.name == 'on':
             value = self.device.on
+        elif self.name == 'level':
+            value = self.device.level
         else:
             return
 
