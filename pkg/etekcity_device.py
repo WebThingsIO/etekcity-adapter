@@ -93,10 +93,31 @@ class EtekcityBulb(EtekcityDevice):
                 self.brightness
             )
 
+        if vesync_dev.color_temp_feature:
+            self._type.append('ColorControl')
+            self.properties['colorTemperature'] = EtekcityBulbProperty(
+                self,
+                'colorTemperature',
+                {
+                    '@type': 'ColorTemperatureProperty',
+                    'title': 'Color Temperature',
+                    'type': 'integer',
+                    'unit': 'kelvin',
+                    'minimum': 2700,
+                    'maximum': 6500,
+                },
+                self.color_temp
+            )
+
     @property
     def brightness(self):
         """Determine current brightness."""
         return self.vesync_dev.brightness
+
+    @property
+    def color_temp(self):
+        """Determine current color temperature."""
+        return self.vesync_dev.color_temp_kelvin
 
 
 class EtekcityOutlet(EtekcityDevice):
@@ -182,3 +203,24 @@ class EtekcitySwitch(EtekcityDevice):
         EtekcityDevice.__init__(self, adapter, _id, vesync_dev)
 
         self._type = ['OnOffSwitch']
+
+        if vesync_dev.is_dimmable():
+            self._type.append('MultiLevelSwitch')
+            self.properties['level'] = EtekcitySwitchProperty(
+                self,
+                'level',
+                {
+                    '@type': 'LevelProperty',
+                    'title': 'Level',
+                    'type': 'integer',
+                    'unit': 'percent',
+                    'minimum': 1,
+                    'maximum': 100,
+                },
+                self.level
+            )
+
+    @property
+    def level(self):
+        """Determine current level."""
+        return self.vesync_dev.brightness
