@@ -1,4 +1,4 @@
-"""Etekcity adapter for Mozilla WebThings Gateway."""
+"""Etekcity adapter for WebThings Gateway."""
 
 from gateway_addon import Property
 

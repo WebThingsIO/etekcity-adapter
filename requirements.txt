@@ -1,1 +1,1 @@
-git+https://github.com/markperdue/pyvesync#egg=pyvesync
+pyvesync==1.2.1
