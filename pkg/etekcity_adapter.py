@@ -54,18 +54,27 @@ class EtekcityAdapter(Adapter):
         self.manager.update()
 
         for dev in self.manager.bulbs:
+            if not dev.device_type:
+                continue
+
             _id = 'etekcity-' + dev.uuid
             if _id not in self.devices:
                 device = EtekcityBulb(self, _id, dev)
                 self.handle_device_added(device)
 
         for dev in self.manager.outlets:
+            if not dev.device_type:
+                continue
+
             _id = 'etekcity-' + dev.uuid
             if _id not in self.devices:
                 device = EtekcityOutlet(self, _id, dev)
                 self.handle_device_added(device)
 
         for dev in self.manager.switches:
+            if not dev.device_type:
+                continue
+
             _id = 'etekcity-' + dev.uuid
             if _id not in self.devices:
                 device = EtekcitySwitch(self, _id, dev)
